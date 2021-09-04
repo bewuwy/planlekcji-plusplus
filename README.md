@@ -2,4 +2,4 @@
 
 ulepszona strona do sprawdzania planu lekcji w Batorym: zapisuje klasę oraz automatycznie wyświetla najnowszy plan
 
-https://bewu-ib.github.io/planlekcji-batory/
+http://planlekcji.bewuwy.ga/
