@@ -97,37 +97,31 @@
     </script>
 
     <style>
-      h1 {
-        font-size: 3.5vw;
-      }
-      a {
-        font-size: 2vw;
-        color: #0000EE;
-      }
-      p {
-        font-size: 2vw;
-      }
+      a { color: #0000EE; }
       footer {
-        position: fixed;
         width: 100%;
-        bottom: 1vh;
+        position: fixed; bottom: 1vh;
       }
 
-      #wrap { width: 125vw; height: 90vh; position: fixed; left: -25vw; top: -3vh; overflow: hidden; overflow-y: scroll; display: block; pointer-events: none; }
+      #wrap {
+        width: 125vw;height: 90vh;
+        position: fixed; left: -25vw; top: -3vh;
+        overflow: hidden; overflow-y: scroll;
+        display: block;
+        pointer-events: none; }
       #frame {
-          padding: 0;
-          width: 100vw;
-          height: 90vh;
-          transform: scale(1.5);
-          transform-origin: 0 0;
+        top:0; left:0; bottom:0; right:0;
+        border:none; margin:0; padding:0;
+        width: 100vw; height: 90vh;
+        transform: scale(1.5); transform-origin: 0 0;
       }
     </style>
   </head>
   <body onload=start() style="font-family: 'Roboto', sans-serif; margin: 0;">
     <div id="wrap">
-      <iframe id="frame" src="" style="display: none; top:0; left:0; bottom:0; right:0; border:none; margin:0; padding:0; overflow:hidden;"></iframe>
+      <iframe id="frame" src="" style="display: none;"></iframe>
     </div>
-    <div id="chooseClass" style="display: none; margin: auto; margin-left: auto; margin-right: auto; text-align: center;">
+    <div id="chooseClass" style="display: none; margin: auto; text-align: center;">
       <h1>Choose your class</h1>
     </div>
     <div id="resetClass" style="display: none; position: sticky;">
