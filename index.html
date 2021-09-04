@@ -87,6 +87,7 @@
 
           document.getElementById("frame").src = src;
           document.getElementById("frame").style.display = "block";
+          document.getElementById("wrap").style.pointerEvents = "all";
           document.getElementById("resetClass").style.display = "block";
         }
 
@@ -97,25 +98,39 @@
 
     <style>
       h1 {
-        font-size: 3.5vh;
+        font-size: 3.5vw;
       }
       a {
-        font-size: 2vh;
-        color: rgb(79, 140, 201);
+        font-size: 2vw;
+        color: #0000EE;
       }
       p {
-        font-size: 2vh;
+        font-size: 2vw;
+      }
+      footer {
+        position: fixed;
+        width: 100%;
+        bottom: 1vh;
+      }
+
+      #wrap { width: 125vw; height: 90vh; position: fixed; left: -25vw; top: -3vh; overflow: hidden; overflow-y: scroll; display: block; pointer-events: none; }
+      #frame {
+          padding: 0;
+          width: 100vw;
+          height: 90vh;
+          transform: scale(1.5);
+          transform-origin: 0 0;
       }
     </style>
   </head>
   <body onload=start() style="font-family: 'Roboto', sans-serif; margin: 0;">
-    <iframe id="frame" src="" style="display: none; top:0; left:0; bottom:0; right:0; width:100%; height: 90vh; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;">
-        Your browser doesn't support iframes
-    </iframe>
+    <div id="wrap">
+      <iframe id="frame" src="" style="display: none; top:0; left:0; bottom:0; right:0; border:none; margin:0; padding:0; overflow:hidden;"></iframe>
+    </div>
     <div id="chooseClass" style="display: none; margin: auto; margin-left: auto; margin-right: auto; text-align: center;">
       <h1>Choose your class</h1>
     </div>
-    <div id="resetClass" style="display: none;">
+    <div id="resetClass" style="display: none; position: sticky;">
       <a onclick="document.cookie = 'classId=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';" href="">Change class</a>
     </div>
 
