@@ -15,17 +15,33 @@
       jQuery(document).ready(function(){ jQuery.fn.cookiesEU(); });
     </script>
     <script type="text/javascript" src="plan.js"></script>
+    <script type="text/javascript">
+      function startCustom() {
+        customUrl = getCookie("customUrl");
+        document.getElementById("url").value = customUrl;
+        if (customUrl != null && customUrl != "") {
+          start(customUrl);
+        }
+      }
+      function saveCustomUrl() {
+        setCookie("customUrl", document.getElementById("url").value, 310);
+        startCustom();
+      }
+    </script>
 
   </head>
-  <body onload=start("http://www.batory.edu.pl/plan/index.php"); style="font-family: 'Roboto', sans-serif; margin: 0;">
+  <body onload=startCustom() style="font-family: 'Roboto', sans-serif; margin: 0;">
     <div id="wrap">
       <iframe id="frame" src="" style="display: none;"></iframe>
     </div>
     <div id="chooseClass" style="display: none; margin: auto; text-align: center;">
       <h1>Choose your class</h1>
-      <h3>Batory High School</h3>
-      <div id="classList"></div><br>
-      <p><a href="custom.html">other school</a></p>
+      <form>
+        <label for="url">plan url: </label>
+        <input type="text" id="url" value="" style="width: 13vw;">
+        <input type="button" id="submit" value="Submit" onclick=saveCustomUrl()>
+      </form> <br>
+      <div id="classList"></div>
     </div>
     <div id="resetClass" style="display: none; position: sticky; top: 0;">
       <a onclick="document.cookie = 'classId=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';" href="">Change class</a>

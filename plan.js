@@ -30,10 +30,10 @@ function httpGet(theUrl)
   return [xmlHttp.responseText, xmlHttp.getResponseHeader("x-final-url")];
 }
 
-function start() {
+function start(planUrl) {
   var classId = getCookie("classId");
 
-  var baseUrl = httpGet("http://www.batory.edu.pl/plan/index.php")[1];
+  var baseUrl = httpGet(planUrl)[1];
   baseUrl = baseUrl.split("/").splice(2, 3);
   baseUrl.splice(0, 0, "http:/");
 
@@ -41,11 +41,13 @@ function start() {
     listUrl = baseUrl;
     listUrl.push("lista.html");
     listUrl = listUrl.join("/");
+    console.log(listUrl);
 
     var classList = httpGet(listUrl)[0].split("href=\"plany/o");
     classList.splice(0, 1);
 
-    var chooseClassDiv = document.getElementById("chooseClass");
+    var chooseClassDiv = document.getElementById("classList");
+    chooseClassDiv.innerHTML = "";
     var a;
     for (var i = 0; i < classList.length; i++) {
       classList[i] = classList[i].split("</")[0].split("\" target=\"plan\">");
@@ -56,18 +58,18 @@ function start() {
       a.id = classList[i][0]
       a.onclick = function() {
         setCookie("classId", this.id, 310);
-        chooseClassDiv.style.display = "none";
-        start();
+        window.location.reload(true);
       };
       chooseClassDiv.appendChild(a);
       chooseClassDiv.appendChild(document.createElement("br"));
     }
-    chooseClassDiv.style.display = "block";
+    document.getElementById("chooseClass").style.display = "block";
   }
   else {
     var src = baseUrl.join("/") + "/plany/" + classId;
     console.log(src);
 
+    document.getElementById("chooseClass").style.display = "none";
     document.getElementById("frame").src = src;
     document.getElementById("frame").style.display = "block";
     document.getElementById("wrap").style.pointerEvents = "all";

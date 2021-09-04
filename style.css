@@ -1,20 +1,23 @@
 a {
   color: #0000EE;
 }
+a:hover {
+  opacity: 70%;
+}
 footer {
   width: 100%;
   position: fixed; bottom: 1vh;
 }
 
 #wrap {
-  width: 125vw;height: 90vh;
-  position: fixed; left: -25vw; top: -3vh;
+  width: 125vw;height: 96vh;
+  position: fixed; left: -15vw; top: -3vh;
   overflow: hidden; overflow-y: scroll;
   display: block;
   pointer-events: none; }
 #frame {
   top:0; left:0; bottom:0; right:0;
   border:none; margin:0; padding:0;
-  width: 100vw; height: 90vh;
-  transform: scale(1.5); transform-origin: 0 0;
+  width: 100vw; height: 100%;
+  transform: scale(1.3); transform-origin: 0 0;
 }
