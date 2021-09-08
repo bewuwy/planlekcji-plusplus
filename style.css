@@ -11,6 +11,10 @@ footer {
 footer p {
   margin: 0;
 }
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
 
 @media (max-width:800px)  {
   #planDiv {
@@ -32,7 +36,3 @@ footer p {
 #plan {
   margin: 0 auto;
 }
-/* #plan th, td{
-    width: 20%;
-    border: blue solid 1px;
-} */

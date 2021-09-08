@@ -1,13 +1,8 @@
 .tabela{ /* tabela z planem */
 	border-color:#c0c0c0}
-td{
-	/* font-size:11px */
-}
 th{
 	background-color:#bddfd0;
-	color:#000099;
-	/* font-size:13px */
-}
+	color:#000099;}
 td.g{ /* godzina */
 	background-color:#eaf4f0;
 	color:#000099;
@@ -34,5 +29,3 @@ a.k{ /* klasa */
 .p{ /* przedmiot */
 	color:#000000;
 	font-weight:bold}
-.op{ /* napis */
-	font:10px verdana,sans-serif}

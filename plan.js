@@ -74,6 +74,19 @@ function start(planUrl) {
 
     document.getElementById("plan").innerHTML = plan;
     document.getElementById("planTitle").innerHTML = title;
+
+    var teacherList = document.getElementsByClassName("n");
+    var classRoomList = document.getElementsByClassName("s");
+
+    for (var i = 0; i < teacherList.length; i++) {
+      teacherList[i].href =  baseUrl.join("/") + "/plany" + teacherList[i].pathname;
+      teacherList[i].target = "_blank";
+    }
+    for (var i = 0; i < classRoomList.length; i++) {
+      classRoomList[i].href =  baseUrl.join("/") + "/plany" + classRoomList[i].pathname;
+      classRoomList[i].target = "_blank";
+    }
+
     document.getElementById("planDiv").style.display = "block";
     document.getElementById("resetClass").style.display = "block";
     fitPlan();
@@ -106,6 +119,4 @@ function fitPlan() {
       hoursList[i].innerHTML = hoursList[i].innerHTML.replace("-", "-<br>")
     }
   }
-
-  console.log(FontSizeTable);
 }
