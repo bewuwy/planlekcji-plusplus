@@ -10,12 +10,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="http://ciasteczka.eu/cookiesEU-latest.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="cookies/gdpr-cookie.js"></script>
+    <link href="cookies/gdpr-cookie.css" rel="stylesheet">
     <script type="text/javascript">
-      jQuery(document).ready(function(){ jQuery.fn.cookiesEU(); });
+      $.gdprcookie.init({"cookieTypes": [{"type": "Essential", "value": "essential"}]});
     </script>
-    
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z95RGMH48Y"></script>
     <script>
