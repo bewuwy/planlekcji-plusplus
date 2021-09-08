@@ -8,14 +8,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
     <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="//ciasteczka.eu/cookiesEU-latest.min.js"></script>
     <script type="text/javascript">
       jQuery(document).ready(function(){ jQuery.fn.cookiesEU(); });
     </script>
-    <script type="text/javascript" src="plan.js"></script>
+    <script type="text/javascript" src="js/plan.js"></script>
 
   </head>
   <body style="font-family: 'Roboto', sans-serif; margin: 0;" onload="document.getElementById('url').value = getCookie('customUrl');">
@@ -24,9 +24,15 @@
 
       <form>
         <label for="url">plan url: </label>
-        <input type="text" id="url" value="" style="width: 15vw;">
+        <input type="text" id="url" value="">
         <input type="button" id="submit" value="Submit" onclick="setCookie('customUrl', document.getElementById('url').value, 310); window.location='/plan.html';">
       </form>
+      <a href="/">or choose school from list</a>
+    </div>
+    <div style="margin: auto; text-align: center; overflow: hidden;">
+      <br><h3>how to get the plan url?</h3>
+      <p>copy link location to your school's lesson plan by right-clicking the button used to acces it normally</p>
+      <img src="img/instruction.png">
     </div>
 
     <footer>

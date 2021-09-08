@@ -1,0 +1,31 @@
+.tabela{ /* tabela z planem */
+	border-color:#c0c0c0}
+th{
+	background-color:#bddfd0;
+	color:#000099;}
+td.g{ /* godzina */
+	background-color:#eaf4f0;
+	color:#000099;
+	font-weight:bold;
+	vertical-align:top;
+	text-align:center;
+	white-space:nowrap}
+td.nr{ /* numer lekcji */
+	background-color:#bddfd0;
+	color:#000099;
+	font-weight:bold;
+	text-align:center;
+	vertical-align:top}
+td.l{ /* lekcja */
+	background-color:#ffffff;
+	color:#000000;
+	vertical-align:top}
+a.n{ /* nauczyciel */
+	color:#000099}
+a.s{ /* sala */
+	color:#000099}
+a.k{ /* klasa */
+	color:#000099}
+.p{ /* przedmiot */
+	color:#000000;
+	font-weight:bold}

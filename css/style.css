@@ -1,0 +1,43 @@
+a {
+  color: #0000EE;
+}
+a:hover {
+  opacity: 70%;
+}
+footer {
+  width: 100%;
+  position: fixed; bottom: 0vh;
+  background: white;
+}
+footer p {
+  margin: 0;
+}
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+img {
+  object-fit: contain;
+  max-width: 100%; height: auto;
+}
+
+@media (max-width:800px)  {
+  #planDiv {
+    width: 96vw;
+    height: 90vh;
+    margin-left: 2vw;
+    margin-right: 2vw;
+  }
+}
+@media (min-width:801px)  {
+  #planDiv {
+    width: 80vw;
+    height: 90vh;
+    margin-left: 10vw;
+    margin-right: 10vw;
+  }
+}
+
+#plan {
+  margin: 0 auto;
+}
