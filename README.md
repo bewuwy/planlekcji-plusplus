@@ -1,5 +1,8 @@
-# plan lekcji liceum im. Stefana Batorego w Warszawie
+# plan lekcji++
 
-ulepszona strona do sprawdzania planu lekcji w Batorym: zapisuje klasę, automatycznie wyświetla najnowszy plan oraz automatycznie przybliża
+ulepszona strona do sprawdzania planu lekcji Vulcan:
+  - zapisuje klasę,
+  - automatycznie wyświetla najnowszy plan,
+  - automatycznie ustawia wielkość planu
 
 http://planlekcji.bewuwy.ga/

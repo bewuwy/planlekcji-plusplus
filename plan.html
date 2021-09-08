@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
+    <link href="plan.css" rel="stylesheet">
 
     <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="//ciasteczka.eu/cookiesEU-latest.min.js"></script>
@@ -16,24 +17,30 @@
       jQuery(document).ready(function(){ jQuery.fn.cookiesEU(); });
     </script>
     <script type="text/javascript" src="plan.js"></script>
-    <script>
-      if (getCookie("customUrl") != null && getCookie("customUrl") != "") {
-        window.location = "/plan.html";
+    <script type="text/javascript">
+      function startCustom() {
+        customUrl = getCookie("customUrl");
+        if (customUrl != null && customUrl != "") {
+          start(customUrl);
+        }
+        else {
+          window.location = "/";
+        }
       }
     </script>
-
   </head>
-  <body style="font-family: 'Roboto', sans-serif; margin: auto; margin-top: 7vh;">
-    <div style="margin: auto; text-align: center;">
-      <h1>plan lekcji++</h1>
-      <p>plan lekcji++ jest stroną ulepszająca plan lekcji automatycznie generowany przez e-dziennik Vulcan</p>
-    </div><br>
-    <div id="chooseSchool" style="margin: auto; text-align: center;">
-      <h2>Choose your school</h2>
-      <a onclick="setCookie('customUrl', 'http://www.batory.edu.pl/plan/index.php', 310);
-                  window.location='/plan.html'">Batory High School</a>
-
-      <br><br><a href="custom.html">other school</a>
+  <body onload=startCustom() style="font-family: 'Roboto', sans-serif; margin: 0;">
+    <div id="planDiv" style="display: none;">
+      <br><br><h1 id="planTitle" style="text-align: center;"></h1>
+      <table id="plan"></table>
+    </div>
+    <div id="chooseClass" style="display: none; margin: auto; text-align: center;">
+      <h1>Choose your class</h1>
+      <br><div id="classList"></div>
+      <br><br><a href="/" onclick="setCookie('customUrl', '', 1);">change school</a>
+    </div>
+    <div id="resetClass" style="display: none; position: fixed; top: 1vh; left: 1vh;">
+      <a onclick="document.cookie = 'classId=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';" href="">Change class</a>
     </div>
 
     <footer>

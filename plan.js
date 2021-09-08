@@ -68,11 +68,37 @@ function start(planUrl) {
   else {
     var src = baseUrl.join("/") + "/plany/" + classId;
     console.log(src);
+    var planRequest = httpGet(src)[0];
+    plan = planRequest.split('tabela">')[1].split("</table>")[0];
+    title = planRequest.split('tytulnapis">')[1].split("</span>")[0];
 
-    document.getElementById("chooseClass").style.display = "none";
-    document.getElementById("frame").src = src;
-    document.getElementById("frame").style.display = "block";
-    document.getElementById("wrap").style.pointerEvents = "all";
+    document.getElementById("plan").innerHTML = plan;
+    document.getElementById("planTitle").innerHTML = title;
+    document.getElementById("planDiv").style.display = "block";
     document.getElementById("resetClass").style.display = "block";
+    fitPlan();
   }
+}
+
+function fitPlan() {
+  var WidthDiv = $("#planDiv").width();
+  var WidthTable = $("#plan").width();
+  if (WidthDiv > WidthTable) {
+      var FontSizeTable = parseInt($("#plan").css("font-size"), 10);
+      while (WidthDiv > WidthTable && FontSizeTable < 20) {
+          FontSizeTable++;
+          $("#plan").css("font-size", FontSizeTable);
+          WidthTable = $("#plan").width();
+      }
+  }
+  else if (WidthDiv < WidthTable) {
+      var FontSizeTable = parseInt($("#plan").css("font-size"), 10);
+      while (WidthDiv < WidthTable && FontSizeTable > 5) {
+          FontSizeTable--;
+          $("#plan").css("font-size", FontSizeTable);
+          WidthTable = $("#plan").width();
+      }
+  }
+
+  console.log(FontSizeTable);
 }
