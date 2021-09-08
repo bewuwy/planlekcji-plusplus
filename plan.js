@@ -100,5 +100,12 @@ function fitPlan() {
       }
   }
 
+  var hoursList = document.getElementsByClassName("g");
+  if (WidthDiv < 800) {
+    for (var i = 0; i < hoursList.length; i++) {
+      hoursList[i].innerHTML = hoursList[i].innerHTML.replace("-", "-<br>")
+    }
+  }
+
   console.log(FontSizeTable);
 }
