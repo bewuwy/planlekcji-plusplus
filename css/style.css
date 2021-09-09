@@ -27,6 +27,12 @@ img {
   object-fit: contain;
   max-width: 100%; height: auto;
 }
+table {
+  margin: 0 auto;
+}
+body {
+  font-family: 'Roboto', sans-serif; margin: auto;
+}
 
 #page-container {
   position: relative;
@@ -34,9 +40,6 @@ img {
 }
 #content-wrap {
   padding-bottom: 1.5rem;
-}
-#plan {
-  margin: 0 auto;
 }
 
 @media (max-width:800px)  {

@@ -88,7 +88,7 @@ function start(planUrl) {
     }
 
     document.getElementById("planDiv").style.display = "block";
-    document.getElementById("resetClass").style.display = "block";
+    document.getElementById("planLinks").style.display = "block";
     fitPlan();
   }
 }

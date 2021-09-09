@@ -28,14 +28,35 @@
     </script>
 
     <script type="text/javascript" src="js/plan.js"></script>
+    <script type="text/javascript" src="database/schools.js"></script>
     <script>
       if (getCookie("customUrl") != null && getCookie("customUrl") != "") {
         window.location = "/plan.html";
       }
     </script>
+    <script>
+      window.onload = function() {
+        for (const [city, value] of Object.entries(schools)) {
+          var cityTitle = document.createElement("h4");
+          cityTitle.innerHTML = city;
+          document.getElementById("schoolList").appendChild(cityTitle);
+          for (const [name, data] of Object.entries(schools[city])) {
+            var a = document.createElement("a");
+            a.onclick = function() {
+              setCookie('customUrl', schools[city][name]["url"], 310);
+              setCookie('db', [city, name], 310);
+              window.location='/plan.html';
+            }
+            a.innerHTML = name;
+            document.getElementById("schoolList").appendChild(a);
+            document.getElementById("schoolList").appendChild(document.createElement("br"));
+          }
+        }
+      }
+    </script>
 
   </head>
-  <body style="font-family: 'Roboto', sans-serif; margin: auto;">
+  <body>
     <div id="page-container">
       <div id="content-wrap">
         <div style="margin: auto; text-align: center; margin-top: 7vh;">
@@ -44,8 +65,7 @@
         </div><br>
         <div id="chooseSchool" style="margin: auto; text-align: center;">
           <h2>Choose your school</h2>
-          <a onclick="setCookie('customUrl', 'http://www.batory.edu.pl/plan/index.php', 310);
-                      window.location='/plan.html'">Batory High School</a>
+          <div id="schoolList"></div>
 
           <br><br><a href="custom.html">other school</a>
         </div>
