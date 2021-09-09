@@ -42,21 +42,24 @@
     </script>
   </head>
   <body onload=startCustom() style="font-family: 'Roboto', sans-serif; margin: 0;">
-    <div id="planDiv" style="display: none;">
-      <h1 id="planTitle" style="text-align: center;"></h1>
-      <table id="plan"></table>
+    <div id="page-container">
+      <div id="content-wrap">
+        <div id="planDiv" style="display: none;">
+          <h1 id="planTitle" style="text-align: center;"></h1>
+          <table id="plan"></table>
+        </div>
+        <div id="chooseClass" style="display: none; margin: auto; text-align: center;">
+          <h1>Choose your class</h1>
+          <br><div id="classList"></div>
+          <br><br><a href="/" onclick="setCookie('customUrl', '', 1);">change school</a>
+        </div>
+        <div id="resetClass" style="display: none; position: absolute; top: 1vh; left: 1vh;">
+          <a onclick="document.cookie = 'classId=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';" href="">Change class</a>
+        </div>
+      </div>
+      <footer>
+          <p>© 2021 bewu <a href="https://github.com/bewu-ib/planlekcji-batory">github repository</a></p>
+      </footer>
     </div>
-    <div id="chooseClass" style="display: none; margin: auto; text-align: center;">
-      <h1>Choose your class</h1>
-      <br><div id="classList"></div>
-      <br><br><a href="/" onclick="setCookie('customUrl', '', 1);">change school</a>
-    </div>
-    <div id="resetClass" style="display: none; position: fixed; top: 1vh; left: 1vh;">
-      <a onclick="document.cookie = 'classId=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';" href="">Change class</a>
-    </div>
-
-    <footer>
-        <p style="text-align: center;">© 2021 bewu <a href="https://github.com/bewu-ib/planlekcji-batory">github repository</a></p>
-    </footer>
   </body>
 </html>

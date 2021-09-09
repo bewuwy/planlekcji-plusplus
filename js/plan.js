@@ -96,20 +96,24 @@ function start(planUrl) {
 function fitPlan() {
   var WidthDiv = $("#planDiv").width();
   var WidthTable = $("#plan").width();
+  var HeightTable = $("#plan").height();
+
   if (WidthDiv > WidthTable) {
       var FontSizeTable = parseInt($("#plan").css("font-size"), 10);
-      while (WidthDiv > WidthTable && FontSizeTable < 20) {
+      while (WidthDiv > WidthTable && HeightTable < $(window).height() && FontSizeTable < 20) {
           FontSizeTable++;
           $("#plan").css("font-size", FontSizeTable);
           WidthTable = $("#plan").width();
+          HeightTable = $("#plan").height();
       }
   }
-  else if (WidthDiv < WidthTable) {
+  else if (WidthDiv < WidthTable || HeightTable > $(window).height()) {
       var FontSizeTable = parseInt($("#plan").css("font-size"), 10);
-      while (WidthDiv < WidthTable && FontSizeTable > 5) {
+      while ((WidthDiv < WidthTable || HeightTable > $(window).height()) && FontSizeTable > 5) {
           FontSizeTable--;
           $("#plan").css("font-size", FontSizeTable);
           WidthTable = $("#plan").width();
+          HeightTable = $("#plan").height();
       }
   }
 

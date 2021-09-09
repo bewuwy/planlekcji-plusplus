@@ -36,20 +36,23 @@
 
   </head>
   <body style="font-family: 'Roboto', sans-serif; margin: auto;">
-    <div style="margin: auto; text-align: center; margin-top: 7vh;">
-      <h1>plan lekcji++</h1>
-      <p>plan lekcji++ jest stroną ulepszająca plan lekcji automatycznie generowany przez e-dziennik Vulcan</p>
-    </div><br>
-    <div id="chooseSchool" style="margin: auto; text-align: center;">
-      <h2>Choose your school</h2>
-      <a onclick="setCookie('customUrl', 'http://www.batory.edu.pl/plan/index.php', 310);
-                  window.location='/plan.html'">Batory High School</a>
+    <div id="page-container">
+      <div id="content-wrap">
+        <div style="margin: auto; text-align: center; margin-top: 7vh;">
+          <h1>plan lekcji++</h1>
+          <p>plan lekcji++ jest najlepszą stroną ulepszająca plan lekcji automatycznie generowany przez e-dziennik Vulcan</p>
+        </div><br>
+        <div id="chooseSchool" style="margin: auto; text-align: center;">
+          <h2>Choose your school</h2>
+          <a onclick="setCookie('customUrl', 'http://www.batory.edu.pl/plan/index.php', 310);
+                      window.location='/plan.html'">Batory High School</a>
 
-      <br><br><a href="custom.html">other school</a>
+          <br><br><a href="custom.html">other school</a>
+        </div>
+      </div>
+      <footer>
+          <p style="text-align: center;">© 2021 bewu <a href="https://github.com/bewu-ib/planlekcji-batory">github repository</a></p>
+      </footer>
     </div>
-
-    <footer>
-        <p style="text-align: center;">© 2021 bewu <a href="https://github.com/bewu-ib/planlekcji-batory">github repository</a></p>
-    </footer>
   </body>
 </html>
