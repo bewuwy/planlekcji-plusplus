@@ -19,6 +19,14 @@ function getCookie(name) {
   }
   return null;
 }
+function toggleCookie(name, days) {
+  if (getCookie(name) == null) {
+    setCookie(name, 1, days);
+  }
+  else {
+    setCookie(name, -getCookie(name), days);
+  }
+}
 
 // plan functions
 
@@ -87,6 +95,34 @@ function start(planUrl) {
     for (var i = 0; i < classRoomList.length; i++) {
       classRoomList[i].href =  baseUrl.join("/") + "/plany" + classRoomList[i].pathname;
       classRoomList[i].target = "_blank";
+    }
+
+    daily = getCookie("daily");
+    var dailyLink = document.getElementById("dailyLink");
+    if (daily == 1) {
+      var d = new Date()
+      var day = d.getDay();
+      var weekDays = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek"];
+      if (day > 4) {
+        day = 0;
+      }
+      day = weekDays[day];
+
+      var rows = document.getElementById("plan").rows;
+      for (var i = 0; i < rows[0].cells.length; i++) {
+        if (i > 1 && rows[0].cells[i].innerHTML != day) {
+          for (var j = 0; j < rows.length; j++) {
+              rows[j].deleteCell(i);
+          }
+          rows = document.getElementById("plan").rows;
+          console.log(i);
+          i = 0;
+        }
+      }
+      dailyLink.innerHTML = "week mode";
+    }
+    else {
+      dailyLink.innerHTML = "daily mode";
     }
 
     document.getElementById("planDiv").style.display = "block";
