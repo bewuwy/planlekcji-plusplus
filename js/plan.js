@@ -71,9 +71,11 @@ function start(planUrl) {
     var planRequest = httpGet(src)[0];
     plan = planRequest.split('tabela">')[1].split("</table>")[0];
     title = planRequest.split('tytulnapis">')[1].split("</span>")[0];
+    genDate = planRequest.split('wygenerowano ')[1].split('<br>')[0];
 
     document.getElementById("plan").innerHTML = plan;
     document.getElementById("planTitle").innerHTML = title;
+    document.getElementById("genDate").innerHTML = "created " + genDate;
 
     var teacherList = document.getElementsByClassName("n");
     var classRoomList = document.getElementsByClassName("s");
