@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>plan lekcji++</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/plan.css" rel="stylesheet">
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="cookies/gdpr-cookie.js"></script>
+    <link href="cookies/gdpr-cookie.css" rel="stylesheet">
+    <script type="text/javascript">
+      $.gdprcookie.init({"cookieTypes": [{"type": "Essential", "value": "essential"}]});
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z95RGMH48Y"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-Z95RGMH48Y');
+    </script>
+
+    <script src="/database/schools.js"></script>
+    <script type="text/javascript" src="js/plan.js"></script>
+  </head>
+  <body>
+    <div id="page-container">
+      <div id="content-wrap">
+        {{ content }}
+      </div>
+      <footer>
+          <p>© 2021 bewu <a href="https://github.com/bewu-ib/planlekcji-batory">github repository</a></p>
+      </footer>
+    </div>
+  </body>
+</html>

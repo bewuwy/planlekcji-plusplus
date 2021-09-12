@@ -1,78 +1,40 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>plan lekcji</title>
+---
+layout: default
+---
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="cookies/gdpr-cookie.js"></script>
-    <link href="cookies/gdpr-cookie.css" rel="stylesheet">
-    <script type="text/javascript">
-      $.gdprcookie.init({"cookieTypes": [{"type": "Essential", "value": "essential"}]});
-    </script>
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z95RGMH48Y"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-Z95RGMH48Y');
-    </script>
-
-    <script type="text/javascript" src="js/plan.js"></script>
-    <script type="text/javascript" src="database/schools.js"></script>
-    <script>
-      if (getCookie("customUrl") != null && getCookie("customUrl") != "") {
-        window.location = "/plan.html";
-      }
-    </script>
-    <script>
-      window.onload = function() {
-        for (const [city, value] of Object.entries(schools)) {
-          var cityTitle = document.createElement("h4");
-          cityTitle.innerHTML = city;
-          document.getElementById("schoolList").appendChild(cityTitle);
-          for (const [name, data] of Object.entries(schools[city])) {
-            var a = document.createElement("a");
-            a.onclick = function() {
-              setCookie('customUrl', schools[city][name]["url"], 310);
-              setCookie('db', [city, name], 310);
-              window.location='/plan.html';
-            }
-            a.innerHTML = name;
-            document.getElementById("schoolList").appendChild(a);
-            document.getElementById("schoolList").appendChild(document.createElement("br"));
-          }
+<script>
+  if (getCookie("customUrl") != null && getCookie("customUrl") != "") {
+    window.location = "/plan.html";
+  }
+</script>
+<script>
+  window.onload = function() {
+    for (const [city, value] of Object.entries(schools)) {
+      var cityTitle = document.createElement("h4");
+      cityTitle.innerHTML = city;
+      document.getElementById("schoolList").appendChild(cityTitle);
+      for (const [name, data] of Object.entries(schools[city])) {
+        var a = document.createElement("a");
+        a.onclick = function() {
+          setCookie('customUrl', schools[city][name]["url"], 310);
+          setCookie('db', [city, name], 310);
+          window.location='/plan.html';
         }
+        a.innerHTML = name;
+        document.getElementById("schoolList").appendChild(a);
+        document.getElementById("schoolList").appendChild(document.createElement("br"));
       }
-    </script>
+    }
+  }
+</script>
 
-  </head>
-  <body>
-    <div id="page-container">
-      <div id="content-wrap">
-        <div style="margin: auto; text-align: center; margin-top: 7vh;">
-          <h1>plan lekcji++</h1>
-          <p>plan lekcji++ jest najlepszą stroną ulepszająca plan lekcji automatycznie generowany przez e-dziennik Vulcan</p>
-        </div><br>
-        <div id="chooseSchool" style="margin: auto; text-align: center;">
-          <h2>Choose your school</h2>
-          <div id="schoolList"></div>
+<div style="margin: auto; text-align: center; margin-top: 7vh;">
+  <h1>plan lekcji++</h1>
+  <p>plan lekcji++ jest najlepszą stroną ulepszająca plan lekcji automatycznie generowany przez e-dziennik Vulcan</p>
+</div><br>
+<div id="chooseSchool" style="margin: auto; text-align: center;">
+  <h2>Choose your school</h2>
+  <div id="schoolList"></div>
 
-          <br><br><a href="custom.html">other school</a>
-        </div>
-      </div>
-      <footer>
-          <p style="text-align: center;">© 2021 bewu <a href="https://github.com/bewu-ib/planlekcji-batory">github repository</a></p>
-      </footer>
-    </div>
-  </body>
-</html>
+  <br><br><a href="custom.html">other school</a>
+</div>

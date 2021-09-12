@@ -1,86 +1,48 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>plan lekcji</title>
+---
+layout: default
+---
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/plan.css" rel="stylesheet">
+<script type="text/javascript">
+  window.onload = function() {
+    customUrl = getCookie("customUrl");
+    db = getCookie("db");
 
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="cookies/gdpr-cookie.js"></script>
-    <link href="cookies/gdpr-cookie.css" rel="stylesheet">
-    <script type="text/javascript">
-      $.gdprcookie.init({"cookieTypes": [{"type": "Essential", "value": "essential"}]});
-    </script>
+    if (customUrl != null && customUrl != "") {
+      start(customUrl);
+    }
+    else {
+      window.location = "/";
+    }
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z95RGMH48Y"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+    if (db != null && db != "") {
+      db = db.split(",");
+      db = schools[db[0]][db[1]];
 
-      gtag('config', 'G-Z95RGMH48Y');
-    </script>
+      if ("schoolUrl" in db) { $("#schoolSite").attr("href", db["schoolUrl"]); $("#schoolSite").show(); }
+      if ("percentages" in db) { $("#percentages").attr("href", db["percentages"]); $("#percentages").show(); }
+    }
+  }
+</script>
 
-    <script src="/database/schools.js"></script>
-    <script type="text/javascript" src="js/plan.js"></script>
-    <script type="text/javascript">
-      window.onload = function() {
-        customUrl = getCookie("customUrl");
-        db = getCookie("db");
-
-        if (customUrl != null && customUrl != "") {
-          start(customUrl);
-        }
-        else {
-          window.location = "/";
-        }
-
-        if (db != null && db != "") {
-          db = db.split(",");
-          db = schools[db[0]][db[1]];
-
-          if ("schoolUrl" in db) { $("#schoolSite").attr("href", db["schoolUrl"]); $("#schoolSite").show(); }
-          if ("percentages" in db) { $("#percentages").attr("href", db["percentages"]); $("#percentages").show(); }
-        }
-      }
-    </script>
-  </head>
-  <body>
-    <div id="page-container">
-      <div id="content-wrap">
-        <div id="planDiv" style="display: none;">
-          <h1 id="planTitle" style="text-align: center;"></h1>
-          <table id="plan"></table>
-          <p id="genDate" style="text-align: right;"></p>
-        </div>
-        <div id="chooseClass" style="display: none; margin: auto; text-align: center;">
-          <h1>Choose your class</h1>
-          <br><div id="classList"></div>
-          <br><br><a href="/" onclick="setCookie('customUrl', '', 1); setCookie('db', '', 1);">change school</a>
-        </div>
-        <div id="planLinks" style="display: none; padding: 1vh;">
-          <div style="position: absolute; top: 1vh; left: 1vh;">
-            <a onclick="document.cookie = 'classId=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';" href="">Change class</a>
-          </div>
-          <div style="position: absolute; top: 1vh; right: 1vh;">
-            <a id="dailyLink" onclick="toggleCookie('daily', 310);" href="">weekly/daily mode</a>
-          </div>
-          <div>
-            <a id="schoolSite" target="_blank" style="display: none;">School website</a><br>
-            <a id="percentages" style="display: none;">Percentage thresholds</a>
-          </div>
-        </div>
-      </div>
-      <footer>
-          <p>© 2021 bewu <a href="https://github.com/bewu-ib/planlekcji-batory">github repository</a></p>
-      </footer>
-    </div>
-  </body>
-</html>
+<div id="planDiv" style="display: none;">
+  <h1 id="planTitle" style="text-align: center;"></h1>
+  <table id="plan"></table>
+  <p id="genDate" style="text-align: right;"></p>
+</div>
+<div id="chooseClass" style="display: none; margin: auto; text-align: center;">
+  <h1>Choose your class</h1>
+  <br><div id="classList"></div>
+  <br><br><a href="/" onclick="setCookie('customUrl', '', 1); setCookie('db', '', 1);">change school</a>
+</div>
+<div id="planLinks" style="display: none; padding: 1vh;">
+  <div style="position: absolute; top: 1vh; left: 1vh;">
+    <a onclick="document.cookie = 'classId=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';" href="">Change class</a>
+  </div>
+  <div style="position: absolute; top: 1vh; right: 1vh;">
+    <a id="dailyLink" onclick="toggleCookie('daily', 310);" href="">weekly/daily mode</a>
+  </div>
+  <div>
+    <a id="schoolSite" target="_blank" style="display: none;">School website</a><br>
+    <a id="percentages" style="display: none;">Percentage thresholds</a>
+  </div>
+</div>

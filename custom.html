@@ -1,57 +1,25 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>plan lekcji</title>
+---
+layout: default
+---
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+<script>
+  window.onload = function() {
+    document.getElementById('url').value = getCookie('customUrl');
+  }
+</script>
 
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="cookies/gdpr-cookie.js"></script>
-    <link href="cookies/gdpr-cookie.css" rel="stylesheet">
-    <script type="text/javascript">
-      $.gdprcookie.init({"cookieTypes": [{"type": "Essential", "value": "essential"}]});
-    </script>
+<div id="chooseSchool" style="margin: auto; text-align: center;">
+  <h1>Input your plan link</h1>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z95RGMH48Y"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-Z95RGMH48Y');
-    </script>
-
-    <script type="text/javascript" src="js/plan.js"></script>
-
-  </head>
-  <body onload="document.getElementById('url').value = getCookie('customUrl');">
-    <div id="page-container">
-      <div id="content-wrap">
-        <div id="chooseSchool" style="margin: auto; text-align: center;">
-          <h1>Input your plan link</h1>
-
-          <form>
-            <label for="url">plan url: </label>
-            <input type="text" id="url" value="">
-            <input type="button" id="submit" value="Submit" onclick="setCookie('customUrl', document.getElementById('url').value.replace('.html', '.php'), 310); window.location='/plan.html';">
-          </form>
-          <a href="/">or choose school from list</a>
-        </div>
-        <div style="margin: auto; text-align: center; overflow: hidden;">
-          <br><h3>how to get the plan url?</h3>
-          <p>copy link location to your school's lesson plan by right-clicking the button used to acces it normally</p>
-          <img src="img/instruction.png">
-        </div>
-      </div>
-      <footer>
-          <p style="text-align: center;">© 2021 bewu <a href="https://github.com/bewu-ib/planlekcji-batory">github repository</a></p>
-      </footer>
-    </div>
-  </body>
-</html>
+  <form>
+    <label for="url">plan url: </label>
+    <input type="text" id="url" value="">
+    <input type="button" id="submit" value="Submit" onclick="setCookie('customUrl', document.getElementById('url').value.replace('.html', '.php'), 310); window.location='/plan.html';">
+  </form>
+  <a href="/">or choose school from list</a>
+</div>
+<div style="margin: auto; text-align: center; overflow: hidden;">
+  <br><h3>how to get the plan url?</h3>
+  <p>copy link location to your school's lesson plan by right-clicking the button used to acces it normally</p>
+  <img src="img/instruction.png">
+</div>
