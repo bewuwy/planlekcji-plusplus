@@ -8,19 +8,27 @@ layout: default
   }
 </script>
 <script>
+  var schools = httpGet("https://raw.githubusercontent.com/bewu-ib/" +
+  "plan-plusplus-database/master/schools.json")[0];
+  schools = JSON.parse(schools);
+
   window.onload = function() {
     for (const [city, value] of Object.entries(schools)) {
       var cityTitle = document.createElement("h4");
       cityTitle.innerHTML = city;
       document.getElementById("schoolList").appendChild(cityTitle);
-      for (const [name, data] of Object.entries(schools[city])) {
+      for (const [i, data] of Object.entries(schools[city])) {
         var a = document.createElement("a");
         a.onclick = function() {
-          setCookie('customUrl', schools[city][name]["url"], 310);
-          setCookie('db', [city, name], 310);
+          var school = httpGet('https://raw.githubusercontent.com/bewu-ib/' +
+          `plan-plusplus-database/master/${city}/${schools[city][i]}.json`)[0];
+          school = JSON.parse(school);
+
+          setCookie('customUrl', school["url"], 310);
+          setCookie('db', [city, schools[city][i]], 310);
           window.location='/plan.html';
         }
-        a.innerHTML = name;
+        a.innerHTML = schools[city][i];
         document.getElementById("schoolList").appendChild(a);
         document.getElementById("schoolList").appendChild(document.createElement("br"));
       }

@@ -16,10 +16,17 @@ layout: default
 
     if (db != null && db != "") {
       db = db.split(",");
-      db = schools[db[0]][db[1]];
+      db = httpGet("https://raw.githubusercontent.com/bewu-ib/" +
+      `plan-plusplus-database/master/${db[0]}/${db[1]}.json`)[0];
+      db = JSON.parse(db);
 
-      if ("schoolUrl" in db) { $("#schoolSite").attr("href", db["schoolUrl"]); $("#schoolSite").show(); }
-      if ("percentages" in db) { $("#percentages").attr("href", db["percentages"]); $("#percentages").show(); }
+      if ("schoolUrl" in db) { $("#schoolSite").attr("href",
+      db["schoolUrl"]); $("#schoolSite").show(); }
+      if ("percentages" in db) {
+        $("#percentages").attr("href",
+        "https://github.com/bewu-ib/plan-plusplus-database/blob/master" + db["percentages"]);
+        $("#percentages").show();
+      }
     }
   }
 </script>
