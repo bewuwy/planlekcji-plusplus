@@ -60,3 +60,19 @@ body {
     margin-right: 10vw;
   }
 }
+
+@font-face {
+  font-family: Roboto;
+  src: url(/fonts/Roboto-Regular.tff);
+  font-weight: normal;
+}
+@font-face {
+  font-family: Roboto;
+  src: url(/fonts/Roboto-Bold.tff);
+  font-weight: bold;
+}
+@font-face {
+  font-family: Roboto;
+  src: url(/fonts/Roboto-Italic.tff);
+  font-style: italic;
+}
