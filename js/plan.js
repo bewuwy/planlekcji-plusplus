@@ -101,9 +101,9 @@ function start(planUrl) {
     var dailyLink = document.getElementById("dailyLink");
     if (daily == 1) {
       var d = new Date()
-      var day = d.getDay();
+      var day = d.getDay() - 1;
       var weekDays = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek"];
-      if (day > 4) {
+      if (day > 4 || day < 0) {
         day = 0;
       }
       day = weekDays[day];
