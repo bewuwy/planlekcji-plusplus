@@ -33,7 +33,7 @@ function toggleCookie(name, days) {
 function httpGet(theUrl)
 {
   var xmlHttp = new XMLHttpRequest();
-  xmlHttp.open( "GET", "https://cors.bridged.cc/" + theUrl, false );
+  xmlHttp.open( "GET", "https://cors-bewu.herokuapp.com/" + theUrl, false );
   xmlHttp.send( null );
   return [xmlHttp.responseText, xmlHttp.getResponseHeader("x-final-url")];
 }
