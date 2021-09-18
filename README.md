@@ -6,4 +6,4 @@ ulepszona strona do sprawdzania planu lekcji Vulcan:
   - automatycznie ustawia wielkość planu,
   - dwa tryby wyświetlania planu: dzienny i tygodniowy
 
-http://planlekcji.bewuwy.ga/
+http://planlekcji.bewu.dev/
