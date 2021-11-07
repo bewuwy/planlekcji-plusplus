@@ -28,14 +28,99 @@ function toggleCookie(name, days) {
   }
 }
 
+// web storage
+function savePlan(plan, planTitle, planDate, planUrl) {
+  storage = window.localStorage;
+
+  storage.setItem("plan", plan);
+  storage.setItem("planTitle", planTitle);
+  storage.setItem("planDate", planDate);
+  storage.setItem("planUrl", planUrl);
+}
+
+function loadSavedPlan() {
+  storage = window.localStorage;
+
+  plan = storage.getItem("plan");
+
+  if (plan != null) {
+    planTitle = storage.getItem("planTitle");
+    planDate = storage.getItem("planDate");
+    planUrl = storage.getItem("planUrl");
+
+    document.getElementById("plan").innerHTML = plan;
+    document.getElementById("planTitle").innerHTML = planTitle;
+    document.getElementById("genDate").innerHTML = "created " + planDate;
+    console.log("loaded plan from cache");
+
+    fitPlan();
+    fixOutsideLinks(planUrl);
+    dailyMode();
+
+    showPlan();
+  }
+}
+
+function clearSavedPlan() {
+  storage = window.localStorage;
+  storage.clear();
+}
+
 // plan functions
 
-function httpGet(theUrl)
-{
+function httpGet(theUrl) {
   var xmlHttp = new XMLHttpRequest();
   xmlHttp.open( "GET", "https://cors-bewu.herokuapp.com/" + theUrl, false );
   xmlHttp.send( null );
   return [xmlHttp.responseText, xmlHttp.getResponseHeader("x-final-url")];
+}
+
+function fixOutsideLinks(baseUrl) {
+  var teacherList = document.getElementsByClassName("n");
+  var classRoomList = document.getElementsByClassName("s");
+  for (var i = 0; i < teacherList.length; i++) {
+    teacherList[i].href = baseUrl + "/plany" + teacherList[i].pathname;
+    teacherList[i].target = "_blank";
+  }
+  for (var i = 0; i < classRoomList.length; i++) {
+    classRoomList[i].href = baseUrl + "/plany" + classRoomList[i].pathname;
+    classRoomList[i].target = "_blank";
+  }
+}
+
+function dailyMode() {
+  daily = getCookie("daily");
+  var dailyLink = document.getElementById("dailyLink");
+  if (daily == 1) {
+    var d = new Date()
+    var day = d.getDay() - 1;
+    var weekDays = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek"];
+    if (day > 4 || day < 0) {
+      day = 0;
+    }
+    day = weekDays[day];
+
+    var rows = document.getElementById("plan").rows;
+    for (var i = 0; i < rows[0].cells.length; i++) {
+      if (i > 1 && rows[0].cells[i].innerHTML != day) {
+        for (var j = 0; j < rows.length; j++) {
+            rows[j].deleteCell(i);
+        }
+        rows = document.getElementById("plan").rows;
+        console.log(i);
+        i = 0;
+      }
+    }
+    dailyLink.innerHTML = "week mode";
+  }
+  else {
+    dailyLink.innerHTML = "daily mode";
+  }
+}
+
+function showPlan() {
+  document.getElementById("planDiv").style.display = "block";
+  document.getElementById("planLinks").style.display = "block";
 }
 
 function start(planUrl) {
@@ -81,52 +166,13 @@ function start(planUrl) {
     title = planRequest.split('tytulnapis">')[1].split("</span>")[0];
     genDate = planRequest.split('wygenerowano ')[1].split('<br>')[0];
 
+    savePlan(plan, title, genDate, baseUrl.join("/"));
     document.getElementById("plan").innerHTML = plan;
     document.getElementById("planTitle").innerHTML = title;
     document.getElementById("genDate").innerHTML = "created " + genDate;
 
-    var teacherList = document.getElementsByClassName("n");
-    var classRoomList = document.getElementsByClassName("s");
-
-    for (var i = 0; i < teacherList.length; i++) {
-      teacherList[i].href =  baseUrl.join("/") + "/plany" + teacherList[i].pathname;
-      teacherList[i].target = "_blank";
-    }
-    for (var i = 0; i < classRoomList.length; i++) {
-      classRoomList[i].href =  baseUrl.join("/") + "/plany" + classRoomList[i].pathname;
-      classRoomList[i].target = "_blank";
-    }
-
-    daily = getCookie("daily");
-    var dailyLink = document.getElementById("dailyLink");
-    if (daily == 1) {
-      var d = new Date()
-      var day = d.getDay() - 1;
-      var weekDays = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek"];
-      if (day > 4 || day < 0) {
-        day = 0;
-      }
-      day = weekDays[day];
-
-      var rows = document.getElementById("plan").rows;
-      for (var i = 0; i < rows[0].cells.length; i++) {
-        if (i > 1 && rows[0].cells[i].innerHTML != day) {
-          for (var j = 0; j < rows.length; j++) {
-              rows[j].deleteCell(i);
-          }
-          rows = document.getElementById("plan").rows;
-          console.log(i);
-          i = 0;
-        }
-      }
-      dailyLink.innerHTML = "week mode";
-    }
-    else {
-      dailyLink.innerHTML = "daily mode";
-    }
-
-    document.getElementById("planDiv").style.display = "block";
-    document.getElementById("planLinks").style.display = "block";
+    fixOutsideLinks(baseUrl.join("/"));
+    dailyMode();
     fitPlan();
   }
 }
