@@ -6,7 +6,6 @@ layout: default
   window.onload = function() {
     // darkmode check
     checkDarkMode();
-
     // loading cached plan
     loadSavedPlan();
 
@@ -37,19 +36,22 @@ layout: default
     }
   }
 </script>
-
-<div id="planDiv" style="display: none;">
-  <h1 id="planTitle" style="text-align: center;"></h1>
-  <table id="plan"></table>
-  <p id="genDate" style="text-align: right;"></p>
-</div>
+<!-- choose class part -->
 <div id="chooseClass" style="display: none; margin: auto; text-align: center;">
   <h1>Choose your class</h1>
   <br><div id="classList"></div>
   <br><br><a href="/" onclick="setCookie('customUrl', '', 1); setCookie('db', '', 1); clearSavedPlan();">change school</a>
 </div>
+<!-- plan part -->
+<div id="planDiv" style="display: none;">
+  <!-- table -->
+  <h1 id="planTitle" style="text-align: center;"></h1>
+  <table id="plan"></table>
+  <p id="genDate" style="text-align: right;"></p>
+</div>
 <div id="planLinks" style="display: none; padding: 1vh;">
   <div style="position: absolute; top: 1vh; left: 1vh;">
+    <!-- change class button -->
     <a onclick="setCookie('classId', '', 1); clearSavedPlan();" href="">Change class</a>
   </div>
   <div style="position: absolute; top: 1vh; right: 1vh;">
@@ -58,6 +60,7 @@ layout: default
     <a id="darkModeBtn" onclick="toggleDarkMode();">dark/light mode</a>
   </div>
   <div>
+    <!-- more school info links -->
     <a id="schoolSite" target="_blank" style="display: none;">School website</a><br>
     <a id="percentages" style="display: none;">Percentage thresholds</a>
   </div>

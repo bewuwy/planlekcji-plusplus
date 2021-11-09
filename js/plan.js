@@ -101,6 +101,7 @@ function start(planUrl) {
   baseUrl.splice(0, 0, "http:/");
 
   if (classId == null || classId == "") {
+    // pick class if not set
     listUrl = baseUrl;
     listUrl.push("lista.html");
     listUrl = listUrl.join("/");
@@ -129,6 +130,7 @@ function start(planUrl) {
     document.getElementById("chooseClass").style.display = "block";
   }
   else {
+    // show plan if class set
     var src = baseUrl.join("/") + "/plany/" + classId;
     console.log(src);
     var planRequest = httpGet(src)[0];
@@ -144,6 +146,7 @@ function start(planUrl) {
     fixOutsideLinks(baseUrl.join("/"));
     dailyMode();
     fitPlan();
+    showPlan();
   }
 }
 
