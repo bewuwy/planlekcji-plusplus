@@ -4,6 +4,9 @@ layout: default
 
 <script type="text/javascript">
   window.onload = function() {
+    // darkmode check
+    checkDarkMode();
+
     // loading cached plan
     loadSavedPlan();
 
@@ -50,7 +53,9 @@ layout: default
     <a onclick="setCookie('classId', '', 1); clearSavedPlan();" href="">Change class</a>
   </div>
   <div style="position: absolute; top: 1vh; right: 1vh;">
-    <a id="dailyLink" onclick="toggleCookie('daily', 310);" href="">weekly/daily mode</a>
+    <!-- option buttons -->
+    <a id="dailyLink" onclick="toggleCookie('daily', 365);" href="">weekly/daily mode</a> <br>
+    <a id="darkModeBtn" onclick="toggleDarkMode();">dark/light mode</a>
   </div>
   <div>
     <a id="schoolSite" target="_blank" style="display: none;">School website</a><br>

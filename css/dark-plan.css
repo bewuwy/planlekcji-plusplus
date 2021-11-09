@@ -1,0 +1,35 @@
+/* dark style for plan */
+
+/* border for table */
+body.dark table, td, th {
+  border: 1px solid rgb(140, 130, 115);
+  border-color: rgb(140, 130, 115);
+}
+
+/* table headers */
+body.dark th {
+  color: rgb(112, 164, 255);
+  background-color: rgb(36, 74, 61);
+}
+
+/* bg color for cells */
+body.dark td.nr {
+  background-color: rgb(36, 74, 61);
+}
+body.dark td.g {
+  background-color: rgb(24, 46, 39);
+}
+body.dark td.l {
+  background-color: rgb(19, 21, 22);
+}
+
+/* text colours in table */
+body.dark table span, body.dark td.l {
+  color: #e8e6e3;
+}
+body.dark td.g, body.dark td.nr {
+  color: rgb(112, 164, 255);
+}
+body.dark table a {
+  color: rgb(112, 164, 255);
+}

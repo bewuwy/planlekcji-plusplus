@@ -1,3 +1,11 @@
+table {
+  margin: 0 auto;
+}
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
 .tabela{ /* tabela z planem */
 	border-color:#c0c0c0}
 th{

@@ -1,5 +1,6 @@
-// cookies functions
+// plan.js
 
+// cookies functions
 function setCookie(name,value,days) {
   var expires = "";
   if (days) {
@@ -67,7 +68,6 @@ function clearSavedPlan() {
 }
 
 // plan functions
-
 function httpGet(theUrl) {
   var xmlHttp = new XMLHttpRequest();
   xmlHttp.open( "GET", "https://cors-bewu.herokuapp.com/" + theUrl, false );
@@ -85,36 +85,6 @@ function fixOutsideLinks(baseUrl) {
   for (var i = 0; i < classRoomList.length; i++) {
     classRoomList[i].href = baseUrl + "/plany" + classRoomList[i].pathname;
     classRoomList[i].target = "_blank";
-  }
-}
-
-function dailyMode() {
-  daily = getCookie("daily");
-  var dailyLink = document.getElementById("dailyLink");
-  if (daily == 1) {
-    var d = new Date()
-    var day = d.getDay() - 1;
-    var weekDays = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek"];
-    if (day > 4 || day < 0) {
-      day = 0;
-    }
-    day = weekDays[day];
-
-    var rows = document.getElementById("plan").rows;
-    for (var i = 0; i < rows[0].cells.length; i++) {
-      if (i > 1 && rows[0].cells[i].innerHTML != day) {
-        for (var j = 0; j < rows.length; j++) {
-            rows[j].deleteCell(i);
-        }
-        rows = document.getElementById("plan").rows;
-        console.log(i);
-        i = 0;
-      }
-    }
-    dailyLink.innerHTML = "week mode";
-  }
-  else {
-    dailyLink.innerHTML = "daily mode";
   }
 }
 
@@ -177,6 +147,71 @@ function start(planUrl) {
   }
 }
 
+// fitting/style functions
+
+// dark mode
+function checkDarkMode() {
+  var dark = getCookie("dark");
+
+  if (dark == 1 || dark == null) {
+    $('body').addClass("dark");
+    setCookie("dark", 1, 365);
+    $("#darkModeBtn").text("lightmode");
+  }
+  else {
+    $('body').removeClass("dark");
+    setCookie("dark", 0, 365);
+    $("#darkModeBtn").text("darkmode");
+  }
+}
+
+function toggleDarkMode() {
+  var dark = getCookie("dark");
+
+  if (dark == 0) {
+    $('body').addClass("dark");
+    setCookie("dark", 1, 365);
+    $("#darkModeBtn").text("lightmode");
+  }
+  else {
+    $('body').removeClass("dark");
+    setCookie("dark", 0, 365);
+    $("#darkModeBtn").text("darkmode");
+  }
+}
+
+// daily view
+function dailyMode() {
+  daily = getCookie("daily");
+  var dailyLink = document.getElementById("dailyLink");
+  if (daily == 1) {
+    var d = new Date()
+    var day = d.getDay() - 1;
+    var weekDays = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek"];
+    if (day > 4 || day < 0) {
+      day = 0;
+    }
+    day = weekDays[day];
+
+    var rows = document.getElementById("plan").rows;
+    for (var i = 0; i < rows[0].cells.length; i++) {
+      if (i > 1 && rows[0].cells[i].innerHTML != day) {
+        for (var j = 0; j < rows.length; j++) {
+            rows[j].deleteCell(i);
+        }
+        rows = document.getElementById("plan").rows;
+        console.log(i);
+        i = 0;
+      }
+    }
+    dailyLink.innerHTML = "week mode";
+  }
+  else {
+    dailyLink.innerHTML = "daily mode";
+  }
+}
+
+// autofit plan
 function fitPlan() {
   var WidthDiv = $("#planDiv").width();
   var WidthTable = $("#plan").width();

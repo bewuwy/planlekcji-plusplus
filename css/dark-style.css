@@ -1,0 +1,17 @@
+/* dark style for page */
+
+/* body bg and colour */
+body.dark {
+  background-color: rgb(15, 17, 17);
+  color: white;
+}
+
+/* dark links */
+body.dark a {
+  color: rgb(44, 158, 255);
+}
+
+/* dark footer */
+body.dark footer {
+  background-color: rgb(12, 13, 14);
+}

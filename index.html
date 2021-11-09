@@ -6,6 +6,8 @@ layout: default
   if (getCookie("customUrl") != null && getCookie("customUrl") != "") {
     window.location = "/plan.html";
   }
+
+  checkDarkMode();
 </script>
 <script>
   var schools = httpGet("https://raw.githubusercontent.com/bewu-ib/" +
