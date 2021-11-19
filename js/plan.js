@@ -93,8 +93,10 @@ function showPlan() {
   document.getElementById("planLinks").style.display = "block";
 }
 
-function start(planUrl) {
-  var classId = getCookie("classId");
+function start(planUrl, classId=null) {
+  if (classId == null) {
+    classId = getCookie("classId");
+  }
 
   var baseUrl = httpGet(planUrl)[1];
   baseUrl = baseUrl.split("/").splice(2, 3);
@@ -148,6 +150,17 @@ function start(planUrl) {
     fitPlan();
     showPlan();
   }
+}
+
+function sharePlan() {
+  console.log(window.location.origin);
+
+  var shareUrl = "".concat(window.location.origin, "/plan.html?purl=", getCookie("customUrl"), "&cid=", getCookie("classId"));
+  console.log(shareUrl);
+  navigator.clipboard.writeText(shareUrl);
+
+  $("#snackbar").addClass("show");
+  setTimeout(function() { $("#snackbar").removeClass("show"); }, 2000);
 }
 
 // fitting/style functions

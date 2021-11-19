@@ -12,7 +12,21 @@ layout: default
     customUrl = getCookie("customUrl");
     db = getCookie("db");
 
-    if (customUrl != null && customUrl != "") {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    if (urlParams.has("purl")) {
+      if (customUrl == null || customUrl == "") {
+        setCookie("customUrl", urlParams.get("purl"), 310);
+        if (urlParams.has("cid")) {
+            setCookie("classId", urlParams.get("cid"), 310);
+        }
+        window.location = "/plan.html";
+      }
+      else {
+        start(urlParams.get("purl"), urlParams.get("cid"));
+      }
+    }
+    else if (customUrl != null && customUrl != "") {
       start(customUrl);
     }
     else {
@@ -48,7 +62,10 @@ layout: default
   <h1 id="planTitle" style="text-align: center;"></h1>
   <table id="plan"></table>
   <p id="genDate" style="text-align: right;"></p>
+  <a id="share" onclick="sharePlan();">share plan</a>
+  <div id="snackbar">Copied plan url to clipboard</div>
 </div>
+<!-- plan links part -->
 <div id="planLinks" style="display: none; padding: 1vh;">
   <div style="position: absolute; top: 1vh; left: 1vh;">
     <!-- change class button -->
@@ -59,9 +76,11 @@ layout: default
     <a id="dailyLink" onclick="toggleCookie('daily', 365);" href="">weekly/daily mode</a> <br>
     <a id="darkModeBtn" onclick="toggleDarkMode();">dark/light mode</a>
   </div>
-  <div>
-    <!-- more school info links -->
-    <a id="schoolSite" target="_blank" style="display: none;">School website</a><br>
-    <a id="percentages" style="display: none;">Percentage thresholds</a>
+  <div style="width: 100%; margin: auto;">
+    <div style="width: 50%; margin: auto; float: left;">
+      <!-- more school info links -->
+      <a id="schoolSite" target="_blank" style="display: none;">School website</a><br>
+      <a id="percentages" style="display: none;">Percentage thresholds</a>
+    </div>
   </div>
 </div>
