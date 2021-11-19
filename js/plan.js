@@ -152,18 +152,35 @@ function start(planUrl, classId=null) {
   }
 }
 
+// share functions
 function sharePlan() {
-  console.log(window.location.origin);
-
   var shareUrl = "".concat(window.location.origin, "/plan.html?purl=", getCookie("customUrl"), "&cid=", getCookie("classId"));
   console.log(shareUrl);
   navigator.clipboard.writeText(shareUrl);
 
-  $("#snackbar").addClass("show");
-  setTimeout(function() { $("#snackbar").removeClass("show"); }, 2000);
+  showSnackbar("Copied plan url to clipboard");
+}
+
+function saveFromShare() {
+  const urlParams = new URLSearchParams(window.location.search);
+
+  setCookie("customUrl", urlParams.get("purl"), 310);
+  if (urlParams.has("cid")) {
+      setCookie("classId", urlParams.get("cid"), 310);
+  }
+
+  showSnackbar("Saved plan");
+  setTimeout(function() { window.location = "/plan.html"; }, 700);
 }
 
 // fitting/style functions
+
+// snackbar function
+function showSnackbar(msg) {
+  $("#snackbar").text(msg);
+  $("#snackbar").addClass("show");
+  setTimeout(function() { $("#snackbar").removeClass("show"); }, 2000);
+}
 
 // dark mode
 function checkDarkMode() {

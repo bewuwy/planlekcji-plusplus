@@ -14,21 +14,21 @@ layout: default
 
     const urlParams = new URLSearchParams(window.location.search);
 
+    // if from shared url
     if (urlParams.has("purl")) {
       if (customUrl == null || customUrl == "") {
-        setCookie("customUrl", urlParams.get("purl"), 310);
-        if (urlParams.has("cid")) {
-            setCookie("classId", urlParams.get("cid"), 310);
-        }
-        window.location = "/plan.html";
+        saveFromShare();
       }
       else {
         start(urlParams.get("purl"), urlParams.get("cid"));
+        $("#saveShare").show();
       }
     }
+    // if plan url is saved
     else if (customUrl != null && customUrl != "") {
       start(customUrl);
     }
+    // if nothing is provided
     else {
       window.location = "/";
     }
@@ -62,8 +62,9 @@ layout: default
   <h1 id="planTitle" style="text-align: center;"></h1>
   <table id="plan"></table>
   <p id="genDate" style="text-align: right;"></p>
+  <a id="saveShare" onclick="saveFromShare(); $('#saveShare').hide();" style="display: none">save plan</a> <br>
   <a id="share" onclick="sharePlan();">share plan</a>
-  <div id="snackbar">Copied plan url to clipboard</div>
+  <div id="snackbar"></div>
 </div>
 <!-- plan links part -->
 <div id="planLinks" style="display: none; padding: 1vh;">
