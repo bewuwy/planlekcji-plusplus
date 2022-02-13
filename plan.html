@@ -2,6 +2,7 @@
 layout: default
 ---
 
+<script type="text/javascript" src="/js/parseTable.js"></script>
 <script type="text/javascript">
   window.onload = function() {
     // darkmode check
@@ -50,6 +51,7 @@ layout: default
     }
   }
 </script>
+
 <!-- choose class part -->
 <div id="chooseClass" style="display: none; margin: auto; text-align: center;">
   <h1>Choose your class</h1>
@@ -83,5 +85,17 @@ layout: default
       <!-- more school info links -->
       <a id="schoolSite" target="_blank" style="display: none;">School website</a><br>
       <a id="percentages" style="display: none;">Percentage thresholds</a>
+
+      <!-- add to Google calendar -->
+      <button type="button" id="calendarBtn">Add to Google calendar</button>
+      <script type="text/javascript">
+        $("#calendarBtn").click(function click() {
+          var data = parseTable(document.getElementById('plan'));
+          var lessons = parsePlan(data);
+
+          localStorage.setItem('calendarPlan', JSON.stringify(lessons));
+          window.location = "/gcalendar.html";
+        })
+      </script>
     </div>
 </div>
