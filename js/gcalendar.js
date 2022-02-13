@@ -131,7 +131,4 @@ function addLessonEvent(subject, week_d, hours, location, comment) {
   // TODO: change 2022 to auto year
   addRecurringEvent(subject, dtStart.toISOString(), dtEnd.toISOString(),
     `20220630`);
-
-  console.log(dtStart.toISOString());
-
 }

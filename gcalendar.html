@@ -32,21 +32,31 @@ layout: default
     // addLessonEvent("test", 2, "8:00-8:45", "s69", "bw");
     // addLessonEvent("2test", 6, "9:00-9:45", "s29", "wb");
 
-    n = 0;
-
     // for day in plan
     for (var i = 0; i < plan.length; i++) {
       // for lesson in day
-      for (const [key, value] of Object.entries(plan[i])) {
-        console.log(i, hours[key], value);
+      lessonLoop(i, 0);
 
-        console.log(n);
-        n += 1;
+      function lessonLoop(a, b) {
+        console.log("DAY", a, "LESSON", b);
 
-        addLessonEvent(value[0], i, hours[key], value[1], value[2]);
+        key = Object.entries(plan[a])[b][0];
+        value = Object.entries(plan[a])[b][1];
+
+        console.log(a, hours[key], value);
+
+        addLessonEvent(value[0], a, hours[key], value[1], value[2]);
+
+        if (b < Object.entries(plan[a]).length-1) {
+          setTimeout(function fun() {
+            lessonLoop(a, b+1);
+          }, 500);  // Rate limit requests
+        }
+        else {
+          b = 0;
+        }
       }
     }
-
 
     // localStorage.removeItem("calendarPlan");
     // window.location = "/plan.html";
