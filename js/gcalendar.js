@@ -11,6 +11,7 @@ var SCOPES = "https://www.googleapis.com/auth/calendar.events";
 
 var authorizeButton = document.getElementById('authorize_button');
 var signoutButton = document.getElementById('signout_button');
+var signedInAs = document.getElementById("signed_in_email");
 
 /**
  *  On load, called to load the auth2 library and API client library.
@@ -50,9 +51,15 @@ function updateSigninStatus(isSignedIn) {
   if (isSignedIn) {
     authorizeButton.style.display = 'none';
     signoutButton.style.display = 'block';
+
+    // update signed in as
+    signedInAs.innerHTML = `Signed in as <b>${gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getEmail()}</b>`;
+    signedInAs.style.display = "block";
   } else {
     authorizeButton.style.display = 'block';
+
     signoutButton.style.display = 'none';
+    signedInAs.style.display = "none";
   }
 }
 
