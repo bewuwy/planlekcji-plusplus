@@ -120,7 +120,7 @@ function addRecurringEvent(name, dtStart, dtEnd, dUntil, location, colorId="1",
     }
     else {
       completed_req += 1;
-      setPre(`Added event ${completed_req}/${progress[1]} (${Math.round(completed_req/progress[1]*100)}%)`);
+      setPre(`Added event ${completed_req}/${progress[1]} (${Math.round(completed_req/progress[1]*100)}%) - ETA: ${Math.round((progress[1]-completed_req)*interv/1000)}s`);
 
       // 100%
       if (completed_req >= progress[1]) {

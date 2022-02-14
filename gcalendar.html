@@ -96,7 +96,14 @@ layout: default
 
     console.log(events_to_add);
 
-    // add events with timeout
+    // add events with interval
+    if (events_to_add.length >= 75) {
+      interv = 300;
+    }
+    else  {
+      interv = 200;
+    }
+
     e_i = 0;
     const addEventsLoop = setInterval(function fun() {
       value = events_to_add[e_i];
@@ -111,6 +118,6 @@ layout: default
       if (e_i >= events_to_add.length) {
         clearInterval(addEventsLoop);
       }
-    }, 200);
+    }, interv);
   })
 </script>
