@@ -89,10 +89,11 @@ function appendPre(message) {
   pre.appendChild(textContent);
 }
 
-function addRecurringEvent(name, dtStart, dtEnd, dUntil, colorId="1") {
+function addRecurringEvent(name, dtStart, dtEnd, dUntil, location, colorId="1") {
   gapi.client.calendar.events.insert({
     'calendarId': 'primary',
     "summary": name,
+    "location": location,
     "start": {
       "dateTime": dtStart,
       "timeZone": "Europe/Warsaw"
@@ -137,5 +138,5 @@ function addLessonEvent(subject, week_d, hours, location, comment) {
 
   // TODO: change 2022 to auto year
   addRecurringEvent(subject, dtStart.toISOString(), dtEnd.toISOString(),
-    `20220630`);
+    `20220630`, location);
 }
