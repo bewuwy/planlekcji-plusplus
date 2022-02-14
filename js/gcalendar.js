@@ -136,7 +136,11 @@ function addLessonEvent(subject, week_d, hours, location, comment) {
   dtEnd = new Date(dt.getTime());
   dtEnd.setHours(hours[1][0], hours[1][1], 0);
 
+  // get color id from subject string
+  color_ids = [1, 2, 3, 5, 6, 9, 10];
+  colorId = color_ids[(( (subject.toString().charCodeAt(0) + subject.toString().charCodeAt(1) ) % color_ids.length) + 1)];
+
   // TODO: change 2022 to auto year
   addRecurringEvent(subject, dtStart.toISOString(), dtEnd.toISOString(),
-    `20220630`, location);
+    `20220630`, location, colorId);
 }
