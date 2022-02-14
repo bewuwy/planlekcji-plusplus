@@ -46,33 +46,48 @@ layout: default
 
         hour = hours[key];
 
-        // if j is not last
-        if (j < Object.entries(plan[i]).length-1) {
-
-          keyNext = Object.entries(plan[i])[j+1][0];
-          valueNext = Object.entries(plan[i])[j+1][1];
-
-          // two same lessons next to each other
-          if (value[0] == valueNext[0]) {
-            hour = hour.split("-");
-            hour[1] = hours[keyNext].split("-")[1];
-            hour = hour.join("-");
-
-            // skip next lesson
-            j += 1;
-          }
-        }
-
-        // if two lessons at one time
+        // if two (multiple) lessons at one time
         if (Array.isArray(value[0])) {
-          console.log("TWO LESSONS");
-
           for (var k = 0; k < value.length; k++) {
+
+            // if j is not last
+            if (j < Object.entries(plan[i]).length-1) {
+              keyNext = Object.entries(plan[i])[j+1][0];
+              valueNext = Object.entries(plan[i])[j+1][1];
+
+              // two same lessons next to each other
+              if (Array.isArray(valueNext[0]) && k < valueNext.length && value[k][0] == valueNext[k][0]) {
+                hour = hour.split("-");
+                hour[1] = hours[keyNext].split("-")[1];
+                hour = hour.join("-");
+
+                // skip next lesson
+                j += 1;
+              }
+            }
+
             console.log(i, hour, value[k]);
             events_to_add.push([value[k][0], i, hour, value[k][1], value[k][2]]);
           }
         }
         else {  // one lesson at a time
+
+          // if j is not last
+          if (j < Object.entries(plan[i]).length-1) {
+            keyNext = Object.entries(plan[i])[j+1][0];
+            valueNext = Object.entries(plan[i])[j+1][1];
+
+            // two same lessons next to each other
+            if (value[0] == valueNext[0]) {
+              hour = hour.split("-");
+              hour[1] = hours[keyNext].split("-")[1];
+              hour = hour.join("-");
+
+              // skip next lesson
+              j += 1;
+            }
+          }
+
           console.log([value[0], i, hour, value[1], value[2]]);
           events_to_add.push([value[0], i, hour, value[1], value[2]]);
         }
