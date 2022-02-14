@@ -54,8 +54,6 @@ layout: default
 
           // two same lessons next to each other
           if (value[0] == valueNext[0]) {
-            console.log("BLOK");
-
             hour = hour.split("-");
             hour[1] = hours[keyNext].split("-")[1];
             hour = hour.join("-");
@@ -65,7 +63,29 @@ layout: default
           }
         }
 
-        console.log(i, hour, value);
+        // if two lessons at one time
+        if (Array.isArray(value[0])) {
+          console.log("TWO LESSONS");
+
+          setTimeout(function fun() {
+            addMultipleLessons(0, value);
+          }, 300);
+
+          function addMultipleLessons(m, value_) {
+            console.log(a, hour, value_[m]);
+            addLessonEvent(value_[m][0], a, hour, value_[m][1], value_[m][2]);
+
+            if (m < value_.length-1) {
+              setTimeout(function fun() {
+                addMultipleLessons(m+1, value_);
+              }, 600);
+            }
+          }
+        }
+        else {
+          console.log(a, hour, value);
+          addLessonEvent(value[0], a, hour, value[1], value[2]);
+        }
 
         console.log([value[0], i, hour, value[1], value[2]]);
         events_to_add.push([value[0], i, hour, value[1], value[2]]);
