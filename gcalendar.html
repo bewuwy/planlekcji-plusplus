@@ -33,24 +33,24 @@ layout: default
     // addLessonEvent("test", 2, "8:00-8:45", "s69", "bw");
     // addLessonEvent("2test", 6, "9:00-9:45", "s29", "wb");
 
+    events_to_add = [];
+
     // for day in plan
     for (var i = 0; i < plan.length; i++) {
       // for lesson in day
-      lessonLoop(i, 0);
+      for (var j = 0; j < Object.entries(plan[i]).length; j++) {
+        console.log("DAY", i, "LESSON", j);
 
-      function lessonLoop(a, b) {
-        console.log("DAY", a, "LESSON", b);
-
-        key = Object.entries(plan[a])[b][0];
-        value = Object.entries(plan[a])[b][1];
+        key = Object.entries(plan[i])[j][0];
+        value = Object.entries(plan[i])[j][1];
 
         hour = hours[key];
 
-        // if b is not last
-        if (b < Object.entries(plan[a]).length-1) {
+        // if j is not last
+        if (j < Object.entries(plan[i]).length-1) {
 
-          keyNext = Object.entries(plan[a])[b+1][0];
-          valueNext = Object.entries(plan[a])[b+1][1];
+          keyNext = Object.entries(plan[i])[j+1][0];
+          valueNext = Object.entries(plan[i])[j+1][1];
 
           // two same lessons next to each other
           if (value[0] == valueNext[0]) {
@@ -61,24 +61,34 @@ layout: default
             hour = hour.join("-");
 
             // skip next lesson
-            b += 1;
+            j += 1;
           }
         }
 
-        console.log(a, hour, value);
+        console.log(i, hour, value);
 
-        addLessonEvent(value[0], a, hour, value[1], value[2]);
-
-        if (b < Object.entries(plan[a]).length-1) {
-          setTimeout(function fun() {
-            lessonLoop(a, b+1);
-          }, 500);  // Rate limit requests
-        }
-        else {
-          b = 0;
-        }
+        console.log([value[0], i, hour, value[1], value[2]]);
+        events_to_add.push([value[0], i, hour, value[1], value[2]]);
       }
     }
+
+    console.log(events_to_add);
+
+    // add events with timeout
+    e_i = 0;
+    const addEventsLoop = setInterval(function fun() {
+      value = events_to_add[e_i];
+
+      console.log(`${e_i+1}/${events_to_add.length}`);
+      console.log(value);
+
+      addLessonEvent(value[0], value[1], value[2], value[3], value[4]);
+
+      e_i += 1;
+      if (e_i >= events_to_add.length) {
+        clearInterval(addEventsLoop);
+      }
+    }, 200);
 
     // localStorage.removeItem("calendarPlan");
     // window.location = "/plan.html";
