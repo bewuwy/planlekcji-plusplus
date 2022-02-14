@@ -13,6 +13,8 @@ var authorizeButton = document.getElementById('authorize_button');
 var signoutButton = document.getElementById('signout_button');
 var signedInAs = document.getElementById("signed_in_email");
 
+var completed_req = 0;
+
 /**
  *  On load, called to load the auth2 library and API client library.
  */
@@ -88,8 +90,14 @@ function appendPre(message) {
   var textContent = document.createTextNode(message + '\n');
   pre.appendChild(textContent);
 }
+function setPre(message) {
+  var pre = document.getElementById('content');
+  pre.innerText = message;
+}
 
-function addRecurringEvent(name, dtStart, dtEnd, dUntil, location, colorId="1") {
+function addRecurringEvent(name, dtStart, dtEnd, dUntil, location, colorId="1",
+  progress=null) {
+
   gapi.client.calendar.events.insert({
     'calendarId': 'primary',
     "summary": name,
@@ -107,7 +115,21 @@ function addRecurringEvent(name, dtStart, dtEnd, dUntil, location, colorId="1") 
     ],
     "colorId": colorId
   }).then(function(response) {
-    appendPre("Added event");
+    if (!progress) {
+      appendPre("Added event");
+    }
+    else {
+      completed_req += 1;
+      setPre(`Added event ${completed_req}/${progress[1]} (${Math.round(completed_req/progress[1]*100)}%)`);
+
+      // 100%
+      if (completed_req >= progress[1]) {
+        setTimeout(function fun() {
+          localStorage.removeItem("calendarPlan");
+          window.location = "/plan.html";
+        }, 1000);
+      }
+    }
   });
 }
 
@@ -115,7 +137,7 @@ function addRecurringEvent(name, dtStart, dtEnd, dUntil, location, colorId="1") 
 
 // monday - 0
 // hour - "HH:MM-HH:MM"
-function addLessonEvent(subject, week_d, hours, location, comment) {
+function addLessonEvent(subject, week_d, hours, location, comment, progress=null) {
   dt = new Date();
 
   // convert js week day
@@ -142,5 +164,5 @@ function addLessonEvent(subject, week_d, hours, location, comment) {
 
   // TODO: change 2022 to auto year
   addRecurringEvent(subject, dtStart.toISOString(), dtEnd.toISOString(),
-    `20220630`, location, colorId);
+    `20220630`, location, colorId, progress);
 }

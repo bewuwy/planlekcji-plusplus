@@ -104,15 +104,13 @@ layout: default
       console.log(`${e_i+1}/${events_to_add.length}`);
       console.log(value);
 
-      addLessonEvent(value[0], value[1], value[2], value[3], value[4]);
+      addLessonEvent(value[0], value[1], value[2], value[3], value[4],
+        [e_i+1, events_to_add.length]);
 
       e_i += 1;
       if (e_i >= events_to_add.length) {
         clearInterval(addEventsLoop);
       }
     }, 200);
-
-    // localStorage.removeItem("calendarPlan");
-    // window.location = "/plan.html";
   })
 </script>
