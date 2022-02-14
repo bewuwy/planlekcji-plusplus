@@ -67,28 +67,15 @@ layout: default
         if (Array.isArray(value[0])) {
           console.log("TWO LESSONS");
 
-          setTimeout(function fun() {
-            addMultipleLessons(0, value);
-          }, 300);
-
-          function addMultipleLessons(m, value_) {
-            console.log(a, hour, value_[m]);
-            addLessonEvent(value_[m][0], a, hour, value_[m][1], value_[m][2]);
-
-            if (m < value_.length-1) {
-              setTimeout(function fun() {
-                addMultipleLessons(m+1, value_);
-              }, 600);
-            }
+          for (var k = 0; k < value.length; k++) {
+            console.log(i, hour, value[k]);
+            events_to_add.push([value[k][0], i, hour, value[k][1], value[k][2]]);
           }
         }
-        else {
-          console.log(a, hour, value);
-          addLessonEvent(value[0], a, hour, value[1], value[2]);
+        else {  // one lesson at a time
+          console.log([value[0], i, hour, value[1], value[2]]);
+          events_to_add.push([value[0], i, hour, value[1], value[2]]);
         }
-
-        console.log([value[0], i, hour, value[1], value[2]]);
-        events_to_add.push([value[0], i, hour, value[1], value[2]]);
       }
     }
 
