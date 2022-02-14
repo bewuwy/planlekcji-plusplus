@@ -44,9 +44,30 @@ layout: default
         key = Object.entries(plan[a])[b][0];
         value = Object.entries(plan[a])[b][1];
 
-        console.log(a, hours[key], value);
+        hour = hours[key];
 
-        addLessonEvent(value[0], a, hours[key], value[1], value[2]);
+        // if b is not last
+        if (b < Object.entries(plan[a]).length-1) {
+
+          keyNext = Object.entries(plan[a])[b+1][0];
+          valueNext = Object.entries(plan[a])[b+1][1];
+
+          // two same lessons next to each other
+          if (value[0] == valueNext[0]) {
+            console.log("BLOK");
+
+            hour = hour.split("-");
+            hour[1] = hours[keyNext].split("-")[1];
+            hour = hour.join("-");
+
+            // skip next lesson
+            b += 1;
+          }
+        }
+
+        console.log(a, hour, value);
+
+        addLessonEvent(value[0], a, hour, value[1], value[2]);
 
         if (b < Object.entries(plan[a]).length-1) {
           setTimeout(function fun() {
