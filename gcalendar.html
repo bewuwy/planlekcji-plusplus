@@ -2,6 +2,11 @@
 layout: default
 ---
 
+<!-- TODO: basic style for the page -->
+<!-- TODO: more than 2 events concurrent -->
+<!-- TODO: different groups after each other -->
+<!-- TODO: add event to a new calendar -->
+
 <p>Google Calendar API Quickstart</p>
 
 <button id="authorize_button" style="display: none;">Authorize</button>
@@ -94,30 +99,40 @@ layout: default
       }
     }
 
-    console.log(events_to_add);
+    // create new calendar
+    dt = new Date();
 
-    // add events with interval
-    if (events_to_add.length >= 75) {
-      interv = 300;
-    }
-    else  {
-      interv = 200;
-    }
+    setPre("Creating new calendar...");
+    var calendar = createCalendar(`Lessons ${dt.getFullYear()}`)
+    .then(function(response) {
+      calendar = JSON.parse(response["body"]);
+      calendarId = calendar["id"];
+      console.log(calendarId);
 
-    e_i = 0;
-    const addEventsLoop = setInterval(function fun() {
-      value = events_to_add[e_i];
-
-      console.log(`${e_i+1}/${events_to_add.length}`);
-      console.log(value);
-
-      addLessonEvent(value[0], value[1], value[2], value[3], value[4],
-        [e_i+1, events_to_add.length]);
-
-      e_i += 1;
-      if (e_i >= events_to_add.length) {
-        clearInterval(addEventsLoop);
+      console.log(events_to_add);
+      // add events with interval
+      if (events_to_add.length >= 75) {
+        interv = 300;
       }
-    }, interv);
-  })
+      else  {
+        interv = 200;
+      }
+
+      e_i = 0;
+      const addEventsLoop = setInterval(function fun() {
+        value = events_to_add[e_i];
+
+        console.log(`${e_i+1}/${events_to_add.length}`);
+        console.log(value);
+
+        addLessonEvent(value[0], value[1], value[2], value[3], value[4],
+          [e_i+1, events_to_add.length], calendarId);
+
+        e_i += 1;
+        if (e_i >= events_to_add.length) {
+          clearInterval(addEventsLoop);
+        }
+      }, interv);
+    });
+  });
 </script>

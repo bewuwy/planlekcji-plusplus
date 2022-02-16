@@ -7,7 +7,7 @@ var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/
 
 // Authorization scopes required by the API; multiple scopes can be
 // included, separated by spaces.
-var SCOPES = "https://www.googleapis.com/auth/calendar.events";
+var SCOPES = "https://www.googleapis.com/auth/calendar";
 
 var authorizeButton = document.getElementById('authorize_button');
 var signoutButton = document.getElementById('signout_button');
@@ -96,10 +96,10 @@ function setPre(message) {
 }
 
 function addRecurringEvent(name, dtStart, dtEnd, dUntil, location, colorId="1",
-  progress=null) {
+  progress=null, calendarId="primary") {
 
   gapi.client.calendar.events.insert({
-    'calendarId': 'primary',
+    'calendarId': calendarId,
     "summary": name,
     "location": location,
     "start": {
@@ -133,11 +133,20 @@ function addRecurringEvent(name, dtStart, dtEnd, dUntil, location, colorId="1",
   });
 }
 
+function createCalendar(summary, timeZone="Europe/Warsaw") {
+  return gapi.client.calendar.calendars.insert({
+    "summary": summary,
+    "timeZone": timeZone
+  });
+}
+
 // plan functions
 
 // monday - 0
 // hour - "HH:MM-HH:MM"
-function addLessonEvent(subject, week_d, hours, location, comment, progress=null) {
+function addLessonEvent(subject, week_d, hours, location, comment, progress=null,
+  calendarId="primary") {
+
   dt = new Date();
 
   // convert js week day
@@ -164,5 +173,5 @@ function addLessonEvent(subject, week_d, hours, location, comment, progress=null
 
   // TODO: change 2022 to auto year
   addRecurringEvent(subject, dtStart.toISOString(), dtEnd.toISOString(),
-    `20220630`, location, colorId, progress);
+    `20220630`, location, colorId, progress, calendarId);
 }
